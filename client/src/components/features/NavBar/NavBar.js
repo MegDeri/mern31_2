@@ -1,16 +1,23 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 class NavBar extends React.Component {
 
+  state = {
+    links: [
+      { path: '/', title: 'Home' },
+      { path: '/posts/new', title: 'Add post' },
+      { path: '/posts', title: 'Posts' },
+      { path: '/contact', title: 'Contact' },
+    ],
+  }
+
   render() {
+    const {links} = this.state;
     return (
-      <div>
-        <Link to='/'>Home</Link>
-        <Link to='/posts'>Posts</Link>
-        <Link to='/posts/new'>Add_Post</Link>
-        <Link to='/contact'>Contact</Link>
-      </div>
+      <nav>
+     <Logo/>
+     <MainMenu links={links}></MainMenu>
+     </nav>
     );
   }
 

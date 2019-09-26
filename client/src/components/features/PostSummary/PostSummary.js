@@ -11,7 +11,7 @@ import cutText from '../../../cutText/cutText';
 const PostSummary = ({ id, title, content }) => (
   <article className="post-summary">
     <SmallTitle>{title}</SmallTitle>
-    <HtmlBox>{cutText(content, 250)}</HtmlBox>
+    <HtmlBox>{cutText(content, 100)}</HtmlBox>
     <Button variant="primary">
     <Link to={`/posts/${id}`}>Read more</Link>  
     </Button>
