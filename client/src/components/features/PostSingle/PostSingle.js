@@ -23,7 +23,7 @@ class PostSingle extends React.Component {
             <article className="post-summary">
                 <SmallTitle>{posts[0].title}</SmallTitle>
                 <HtmlBox>{posts[0].content}</HtmlBox>
-                <p>{posts[0].author}</p>
+                <p>Author: {posts[0].author}</p>
             </article> 
       ) : ( 
         <Alert variant="info"> No posts!!! </Alert>
