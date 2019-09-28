@@ -6,6 +6,7 @@ export const getPosts = ({ posts }) => posts.data;
 export const getSinglePost = ({ posts }) => posts.singlePost;
 export const counterPosts = ({ posts }) => posts.data.length;
 export const getRequest = ({ posts }) => posts.request;
+export const getPages = ({ posts }) => Math.ceil(posts.amount / posts.postsPerPage);
 
 /* ACTIONS */
 // action name creator
@@ -18,13 +19,30 @@ export const errorRequest = error => ({ error, type: ERROR_REQUEST });
 export const loadPosts = payload => ({ payload, type: LOAD_POSTS });
 export const loadSinglePost = payload => ({ payload, type: LOAD_SINGLE_POST });
 export const resetRequest = () => ({type: RESET_REQUEST});
+export const loadPostsByPage = payload => ({payload, type: LOAD_POSTS_PAGE});
+
 
 export const LOAD_POSTS = createActionName('LOAD_POSTS');
+export const LOAD_POSTS_PAGE = createActionName('LOAD_POSTS_PAGE');
 export const LOAD_SINGLE_POST = createActionName('LOAD_SINGLE_POST');
 export const START_REQUEST = createActionName('START_REQUEST');
 export const END_REQUEST = createActionName('END_REQUEST');
 export const ERROR_REQUEST = createActionName('ERROR_REQUEST');
 export const RESET_REQUEST = createActionName('RESET_REQUEST');
+
+/* INITIAL STATE */
+const initialState = {
+  data: [],
+  request: {
+    pending: false,
+    error: null,
+    success: null,
+  },
+  singlePost: [],
+  amount: 0,
+  postsPerPage: 10,
+  presentPage: 1,
+};
 
 /* THUNKS */
 //load all Posts
@@ -83,22 +101,50 @@ export const loadPostsRequest = () => {
     };
   };
 
-/* INITIAL STATE */
-const initialState = {
-  data: [],
-  request: {
-    pending: false,
-    error: null,
-    success: null,
-  },
-  singlePost: [],
-};
+  export const loadPostsByPageRequest = (page) => {
+    return async dispatch => {
+  
+      dispatch(startRequest());
+      try {
+  
+        const postsPerPage = 10;
+  
+        const startAt = (page - 1) * postsPerPage;
+        const limit = postsPerPage;
+  
+        let res = await axios.get(`${API_URL}/posts/range/${startAt}/${limit}`);
+        await new Promise((resolve, reject) => setTimeout(resolve, 2000));
+  
+        const payload = {
+          posts: res.data.posts,
+          amount: res.data.amount,
+          postsPerPage,
+          presentPage: page,
+        };
+  
+        dispatch(loadPostsByPage(payload));
+        dispatch(endRequest());
+  
+      } catch(e) {
+        dispatch(errorRequest(e.message));
+      }
+  
+    };
+  };
 
 /* REDUCER */
 export default function reducer(statePart = initialState, action = {}) {
   switch (action.type) {
     case LOAD_POSTS:
         return { ...statePart, data: action.payload };
+    case LOAD_POSTS_PAGE:
+    return {
+      ...statePart,
+      postsPerPage: action.payload.postsPerPage,
+      presentPage: action.payload.presentPage,
+      amount: action.payload.amount,
+      data: [...action.payload.posts],
+    };
     case LOAD_SINGLE_POST:
         return {...statePart, singlePost: action.payload };
     case START_REQUEST:

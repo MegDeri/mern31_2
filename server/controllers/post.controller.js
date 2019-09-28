@@ -24,7 +24,6 @@ exports.getSinglePost = async (req, res) => {
 };
 
 //add post
-
 exports.addPost = async (req, res) => {
   
   try {
@@ -40,6 +39,25 @@ exports.addPost = async (req, res) => {
     res.status(200).json(postSaved);
 
   } catch(err) {
+    res.status(500).json(err);
+  }
+}
+
+//get paginations
+exports.getPostsByRange = async (req, res) => {
+  try {
+    let {startAt, limit} = req.params;
+
+    startAt = parseInt(startAt);
+    limit = parseInt(limit);
+   
+    let posts = await Post.find().skip(startAt).limit(limit);
+    let amount = await Post.countDocuments();
+    res.status(200).json({
+      posts,
+      amount,
+  });
+  } catch (err) {
     res.status(500).json(err);
   }
 }
