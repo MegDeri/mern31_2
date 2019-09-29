@@ -7,6 +7,7 @@ export const getSinglePost = ({ posts }) => posts.singlePost;
 export const counterPosts = ({ posts }) => posts.data.length;
 export const getRequest = ({ posts }) => posts.request;
 export const getPages = ({ posts }) => Math.ceil(posts.amount / posts.postsPerPage);
+export const postsPerPage = ({ posts }) => posts.postsPerPage;
 
 /* ACTIONS */
 // action name creator
@@ -40,7 +41,7 @@ const initialState = {
   },
   singlePost: [],
   amount: 0,
-  postsPerPage: 10,
+  postsPerPage: 5,
   presentPage: 1,
 };
 
@@ -106,8 +107,8 @@ export const loadPostsRequest = () => {
   
       dispatch(startRequest());
       try {
-  
-        const postsPerPage = 10;
+
+        const postsPerPage = 5;
   
         const startAt = (page - 1) * postsPerPage;
         const limit = postsPerPage;

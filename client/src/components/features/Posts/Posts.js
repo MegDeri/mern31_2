@@ -7,24 +7,24 @@ import Pagination from '../../common/Pagination/Pagination';
 
 
 class Posts extends React.Component {
-
+ 
   componentDidMount() {
-    const { loadPostsByPage } = this.props;
-    loadPostsByPage(1);
+    const { loadPostsByPage, initialPage, postsPerPage} = this.props;
+    loadPostsByPage(initialPage, postsPerPage);
   }
 
   loadPostsPage = (page) => {
-    const { loadPostsByPage } = this.props;
-    loadPostsByPage(page);
+    const { loadPostsByPage, postsPerPage } = this.props;
+    loadPostsByPage(page, postsPerPage);
   }
 
   render() {
-    const {posts, request, pages} = this.props;
+    const {posts, request, pages, pagination} = this.props;
     const {loadPostsPage} = this;
 
     const textin =  request.pending ? ( 
         <Spinner /> 
-      ) : request.success ? ( 
+      ) : request.success && pagination === true ? ( 
          posts.length > 0 ? (
           <div>
             <PostsList posts={posts} />
@@ -53,6 +53,12 @@ Posts.propTypes = {
     })
   ),
   loadPostsByPage: PropTypes.func.isRequired,
+};
+
+Posts.defaultProps = {
+  initialPage: 1,
+  postsPerPage: 5,
+  pagination: true
 };
 
 export default Posts;
