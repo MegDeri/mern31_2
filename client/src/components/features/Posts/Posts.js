@@ -19,21 +19,21 @@ class Posts extends React.Component {
   }
 
   render() {
-    const {posts, request, pages, pagination} = this.props;
+    const {posts, request, pages, pagination, presentPage} = this.props;
     const {loadPostsPage} = this;
 
     const textin =  request.pending ? ( 
         <Spinner /> 
-      ) : request.success && pagination === true ? ( 
-         posts.length > 0 ? (
+      ) : request.success && posts.length > 0 ? ( 
+        pagination === true ? (
           <div>
             <PostsList posts={posts} />
-            <Pagination pages={pages} onPageChange={loadPostsPage} />
+            <Pagination pages={pages} onPageChange={loadPostsPage} initialPage={presentPage} />
           </div>
       ) : ( 
-        <Alert variant="info"> No posts!!! </Alert>
-      )) : ( 
-        <Alert variant="error"> {request.error} </Alert>
+          <PostsList posts={posts} />
+      )) : (
+        ( <Alert variant="error"> {request.error} </Alert> || <Alert variant="info"> No posts!!! </Alert>) 
       );
 
     return (

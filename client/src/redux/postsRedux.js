@@ -8,6 +8,7 @@ export const counterPosts = ({ posts }) => posts.data.length;
 export const getRequest = ({ posts }) => posts.request;
 export const getPages = ({ posts }) => Math.ceil(posts.amount / posts.postsPerPage);
 export const postsPerPage = ({ posts }) => posts.postsPerPage;
+export const presentPage = ({ posts }) => posts.presentPage;
 
 /* ACTIONS */
 // action name creator
@@ -90,8 +91,7 @@ export const loadPostsRequest = () => {
 
       dispatch(startRequest());
       try {
-  
-        let res = await axios.post(`${API_URL}/posts`, post);
+        await axios.post(`${API_URL}/posts`, post);
         await new Promise((resolve, reject) => setTimeout(resolve, 2000));
         dispatch(endRequest());
   

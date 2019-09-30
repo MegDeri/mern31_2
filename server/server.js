@@ -4,6 +4,7 @@ const config = require('./config');
 const mongoose = require('mongoose');
 const loadTestData = require('./testData');
 const helmet = require('helmet');
+const mongoSanitize = require('mongo-sanitize');;
 
 const app = express();
 
@@ -15,6 +16,9 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use('/api', postRoutes);
+app.use((req, res) => {
+  let private = mongoSanitize(req.params.body);
+});
 
 // connects our back end code with the database
 mongoose.connect(config.DB, { useNewUrlParser: true });
