@@ -5,6 +5,8 @@ import Spinner from '../../common/Spinner/Spinner';
 import Alert from '../../common/Alert/Alert';
 import HtmlBox from '../../common/HtmlBox/HtmlBox';
 import SmallTitle from '../../common/SmallTitle/SmallTitle';
+import { FacebookProvider, Comments, ShareButton } from 'react-facebook';
+import { BASE_URL } from '../../../config.js'
 
 class PostSingle extends React.Component {
 
@@ -14,16 +16,24 @@ class PostSingle extends React.Component {
   }
 
   render() {
-    const {posts, request} = this.props;
+    const {posts, request, location} = this.props;
 
     const textin =  request.pending ? ( 
         <Spinner /> 
       ) : request.success ? ( 
          posts.length > 0 ? (
             <article className="post-summary">
-                <SmallTitle>{posts[0].title}</SmallTitle>
-                <HtmlBox>{posts[0].content}</HtmlBox>
-                <p>Author: {posts[0].author}</p>
+              <SmallTitle>{posts[0].title}</SmallTitle>
+              <HtmlBox>{posts[0].content}</HtmlBox>
+              <p>Author: {posts[0].author}</p>
+              <FacebookProvider appId="381113066102363">
+                <Comments href={`${BASE_URL}/${location.pathname}`} />
+              </FacebookProvider>
+              <FacebookProvider appId="381113066102363"> 
+                <ShareButton className="fb-share-button" href={`${BASE_URL}/${location.pathname}`} >
+                  Share this link!
+                </ShareButton>
+              </FacebookProvider>
             </article> 
       ) : ( 
         <Alert variant="info"> No posts!!! </Alert>
@@ -32,7 +42,9 @@ class PostSingle extends React.Component {
       );
 
     return (
-      <div> {textin} </div>
+      <div> 
+        {textin} 
+      </div>
     );
   }
 
