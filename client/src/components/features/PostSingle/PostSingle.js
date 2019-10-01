@@ -38,7 +38,8 @@ class PostSingle extends React.Component {
       ) : ( 
         <Alert variant="info"> No posts!!! </Alert>
       )) : ( 
-        <Alert variant="error"> {request.error} </Alert>
+        <Alert variant="error"> {(request.error).toString()} </Alert>,
+        console.log(request.error)
       );
 
     return (

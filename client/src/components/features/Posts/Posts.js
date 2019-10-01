@@ -15,6 +15,7 @@ class Posts extends React.Component {
 
   loadPostsPage = (page) => {
     const { loadPostsByPage, postsPerPage } = this.props;
+    
     loadPostsByPage(page, postsPerPage);
   }
 
@@ -32,10 +33,10 @@ class Posts extends React.Component {
           </div>
       ) : ( 
           <PostsList posts={posts} />
-      )) : (
-        ( <Alert variant="error"> {request.error} </Alert> || <Alert variant="info"> No posts!!! </Alert>) 
+      )) :  (
+         ( <Alert variant="error"> {request.error} </Alert> || <Alert variant="info"> No posts!!! </Alert>) 
       );
-
+     
     return (
       <div> {textin} </div>
     );
