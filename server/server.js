@@ -4,7 +4,8 @@ const config = require('./config');
 const mongoose = require('mongoose');
 const loadTestData = require('./testData');
 const helmet = require('helmet');
-const mongoSanitize = require('mongo-sanitize');;
+const mongoSanitize = require('mongo-sanitize');
+const path = require('path');
 
 const app = express();
 
@@ -20,6 +21,22 @@ app.use((req, res) => {
   let private = mongoSanitize(req.params.body);
 });
 
+app.use(function (req, res, next) {
+    res.status(404).send("We are sorry, page not found");
+});
+
+app.listen(config.PORT, function() {
+    console.log("Function is listening on port:", config.PORT);
+});
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '/../client/build')));
+
+//use path from React App
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/../client/build/index.html'));
+  });
+
 // connects our back end code with the database
 mongoose.connect(config.DB, { useNewUrlParser: true });
 let db = mongoose.connection;
@@ -30,10 +47,5 @@ db.once('open', () => {
 });
 db.on('error', (err) => console.log('Error ' + err));
 
-app.listen(config.PORT, function() {
-    console.log("Function is listening on port:", config.PORT);
-});
 
-app.use(function (req, res, next) {
-    res.status(404).send("We are sorry, page not found");
-});
+
