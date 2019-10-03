@@ -31,7 +31,7 @@ app.get('*', (req, res) => {
   });
 
 // connects our back end code with the database
-mongoose.connect(config.DB, { useNewUrlParser: true });
+mongoose.connect(config.db1, { useNewUrlParser: true });
 let db = mongoose.connection;
 
 db.once('open', () => {
@@ -41,8 +41,12 @@ db.once('open', () => {
 
 db.on('error', (err) => console.log('Error ' + err));
 
-app.listen(config.PORT, function() {
-    console.log("Function is listening on port:", config.PORT);
+app.listen(config.port, function() {
+    console.log("Function is listening on port:", config.port);
 });
+
+
+    
+   
 
 
