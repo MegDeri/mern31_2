@@ -30,6 +30,8 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/../client/build/index.html'));
   });
 
+  app.get('/', (req, res) => res.send('Hello World!'));
+
 // connects our back end code with the database
 mongoose.connect(config.db1, { useNewUrlParser: true });
 let db = mongoose.connection;
