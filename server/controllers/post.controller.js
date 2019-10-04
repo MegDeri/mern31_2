@@ -30,9 +30,9 @@ exports.addPost = async (req, res) => {
     const { title, author, content } = req.body;
 
     let newPost = new Post();
-    newPost.title = title;
-    newPost.author = author;
-    newPost.content = content;
+    const mongoSanitize = (req.body);
+    let newPost = new Post(req.body);
+    
     newPost.id = uuid();
 
     postSaved = await newPost.save();
