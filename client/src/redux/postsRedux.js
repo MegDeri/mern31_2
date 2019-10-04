@@ -101,7 +101,7 @@ export const loadPostsRequest = () => {
     };
   };
 
-  export const loadPostsByPageRequest = (page, postsPerPage = 5) => {
+  export const loadPostsByPageRequest = (page, postsPerPage) => {
     return async dispatch => {
   
       dispatch(startRequest());
@@ -112,7 +112,7 @@ export const loadPostsRequest = () => {
         const startAt = (page - 1) * postsPerPage;
         const limit = postsPerPage;
   
-        let res = await axios.get(`${API_URL}/posts/range/${startAt}/${limit}`);
+        let res = await axios.get(`${BASE_URL}/posts/range/${startAt}/${limit}`);
         //await new Promise((resolve, reject) => setTimeout(resolve, 2000));
   
         const payload = {
