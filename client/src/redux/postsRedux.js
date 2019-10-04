@@ -114,7 +114,7 @@ export const loadPostsRequest = () => {
         const startAt = (page - 1) * postsPerPage;
         const limit = postsPerPage;
   
-        let res = await axios.get(`${BASE_URL}${API_URL}`);
+        let res = await axios.get(`${BASE_URL}/${API_URL}`);
         //await new Promise((resolve, reject) => setTimeout(resolve, 2000));
         //let res = await axios.get(`${BASE_URL}/posts/range/${startAt}/${limit}`);
   
