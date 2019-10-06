@@ -24,22 +24,22 @@ exports.getSinglePost = async (req, res) => {
 };
 
 //add post
-exports.addPost = async (req, res) => {
-  
+exports.addPost = async function (req, res) {
   try {
-    const { title, author, content } = req.body;
+      const { title, author, content } = req.body;
 
-    const mongoSanitize = (req.body);
-    let newPost = new Post(req.body);
-     newPost.id = uuid();
+      let newPost = new Post();
+      newPost.title = title;
+      newPost.author = author;
+      newPost.content = content;
+      newPost.id = uuid();
 
-    postSaved = await newPost.save();
-    res.status(200).json(postSaved);
-
-  } catch(err) {
-    res.status(500).json(err);
+      postSaved = await newPost.save();
+      res.status(200).json(postSaved);
+  } catch (err) {
+      res.status(500).json(err);
   }
-}
+};
 
 //get paginations
 exports.getPostsByRange = async (req, res) => {

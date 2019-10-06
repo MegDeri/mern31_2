@@ -103,7 +103,7 @@ export const loadPostsRequest = () => {
     };
   };
 
-  export const loadPostsByPageRequest = (page, postsPerPage = 5) => {
+  export const loadPostsByPageRequest = (page, postsPerPage) => {
     return async dispatch => {
   
       dispatch(startRequest());
