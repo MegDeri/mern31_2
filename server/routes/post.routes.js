@@ -1,18 +1,20 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-const PostController = require('../controllers/post.controller');
+const PostController = require("../controllers/post.controller");
 
 // get all posts
-router.route('/posts').get(PostController.getPosts);
+router.route("/posts").get(PostController.getPosts);
 
 //get single post
-router.route('/posts/:id').get(PostController.getSinglePost);
+router.route("/posts/:id").get(PostController.getSinglePost);
 
 // add posts
-router.route('/posts').post(PostController.addPost);
+router.route("/posts").post(PostController.addPost);
 
 // get posts by range
-router.route('/posts/range/:startAt/:limit').get(PostController.getPostsByRange);
+router
+  .route("/posts/range/:startAt/:limit")
+  .get(PostController.getPostsByRange);
 
 module.exports = router;

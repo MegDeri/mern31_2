@@ -1,19 +1,18 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React from "react";
+import { Switch, Route } from "react-router-dom";
 
-import MainLayout from './components/layout/MainLayout/MainLayout';
+import MainLayout from "./components/layout/MainLayout/MainLayout";
 
 // import routes
-import Home from './components/pages/Home/HomePage';
-import Posts from './components/pages/Posts/PostsPage';
-import AddPost from './components/posts/AddPost/AddPost';
-import SinglePostPage from './components/posts/SinglePostPage/SinglePostPage';
-import Contact from './components/pages/Contact/ContactPage';
-import NotFound from './components/pages/NotFound/NotFoundPage';
+import Home from "./components/pages/Home/HomePage";
+import Posts from "./components/pages/Posts/PostsPage";
+import AddPost from "./components/posts/AddPost/AddPost";
+import SinglePostPage from "./components/posts/SinglePostPage/SinglePostPage";
+import Contact from "./components/pages/Contact/ContactPage";
+import NotFound from "./components/pages/NotFound/NotFoundPage";
 
 class App extends React.Component {
- 
-  render () {
+  render() {
     return (
       <MainLayout>
         <Switch>
@@ -28,5 +27,5 @@ class App extends React.Component {
     );
   }
 }
-  
+
 export default App;

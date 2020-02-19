@@ -1,4 +1,4 @@
-@import '../../../styles/settings.scss';
+@import "../../../styles/settings.scss";
 
 .text-field {
   position: relative;
@@ -12,7 +12,7 @@
     outline: none;
     font-size: inherit;
     padding: $base-size / 2 0;
-    transition: .2s;
+    transition: 0.2s;
     opacity: 0.8;
     background: none;
     width: 100%;
@@ -26,7 +26,6 @@
       border-bottom: 2px solid $color-primary;
       opacity: 1;
     }
-
   }
 
   &__label {
@@ -34,12 +33,11 @@
     top: -$base-size * 1;
     left: 0;
     font-size: $base-size;
-    transition: .2s;
+    transition: 0.2s;
 
     &--big {
       font-size: inherit;
       top: 4px;
     }
   }
-
 }

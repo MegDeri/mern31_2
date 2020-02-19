@@ -1,21 +1,19 @@
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
+import { createStore, combineReducers, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
 
 // import reducers
-import posts from './postsRedux';
+import posts from "./postsRedux";
 
 // combine reducers
 const rootReducer = combineReducers({
-    posts,
-  });
+  posts
+});
 
-  // create store
-  const store = createStore(
-    rootReducer,
-    compose(
-        applyMiddleware(thunk),
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-    )
-  );
+// create store
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(thunk))
+);
 
 export default store;

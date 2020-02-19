@@ -1,27 +1,26 @@
-import React from 'react';
-import Logo from '../../common/Logo/Logo';
-import MainMenu from '../../layout/MainMenu/MainMenu';
-import './NavBar.scss'
+import React from "react";
+import Logo from "../../common/Logo/Logo";
+import MainMenu from "../../layout/MainMenu/MainMenu";
+import "./NavBar.scss";
 
 class NavBar extends React.Component {
-
   state = {
     links: [
-      { path: '/', title: 'Home' },
-      { path: '/posts/new', title: 'Add post' },
-      { path: '/posts', title: 'Posts' },
-      { path: '/contact', title: 'Contact' },
-    ],
-  }
+      { path: "/", title: "Home" },
+      { path: "/posts/new", title: "Add post" },
+      { path: "/posts", title: "Posts" },
+      { path: "/contact", title: "Contact" }
+    ]
+  };
 
   render() {
-    const {links} = this.state;
-    
+    const { links } = this.state;
+
     return (
       <nav className="navbar">
-        <Logo/>
+        <Logo />
         <MainMenu links={links}></MainMenu>
-     </nav>
+      </nav>
     );
   }
 }

@@ -1,12 +1,14 @@
-import React from 'react';
-import { PropTypes } from 'prop-types';
+import React from "react";
+import { PropTypes } from "prop-types";
 
-import PostSummary from '../PostSummary/PostSummary';
+import PostSummary from "../PostSummary/PostSummary";
 
 const PostsList = ({ posts }) => (
   <div>
     <section className="posts-list">
-      {posts.map(post => <PostSummary key={post.id} {...post} />)}
+      {posts.map(post => (
+        <PostSummary key={post.id} {...post} />
+      ))}
     </section>
   </div>
 );
@@ -17,9 +19,9 @@ PostsList.propTypes = {
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       content: PropTypes.string.isRequired,
-      author: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired
     })
-  ),
+  )
 };
 
 export default PostsList;
